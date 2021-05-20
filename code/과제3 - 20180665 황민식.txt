@@ -1,0 +1,237 @@
+//입력 받은 문자가 대문자이면 소문자로, 소문자이면 대문자로, 그 외는 그대로 출력하시오.
+
+#include <stdio.h>
+
+void main() {
+
+	char c;
+	printf("숫자를 입력하시오.");
+	scanf_s("%c", &c,1);
+	if (c >= 'A' && c <= 'Z') {
+		c = c + 32;
+	}
+	else if (c >= 'a' && c <= 'z') {
+		c = c - 32;
+	}
+	printf("결과 : %c\n", c);
+}
+
+//세변의 길이를 입력 받아 삼각형의 둘레를 구하시오.
+//(단 삼각형이 형성 안 되는 경우 체크하여 오류 처리 할 것, 가령 a>=b+c이면 삼각형 안 됨)
+#include <stdio.h>
+
+void main() {
+	int a, b, c;
+	printf("세변의 길이를 입력하시오.\n");
+	scanf_s("%d %d %d", &a, &b, &c);
+	if (a < b + c && b < c + a && c < a + b) {
+		printf("삼각형의 둘레: %d\n", a + b + c);
+	}
+	else
+		printf("삼각형이 안됨\n");
+}
+
+//연도를 입력 받아 윤년인지 아닌지 알려주기
+//(4의 배수이고 100의 배수 아니면 윤년임. 단 400의 배수이면 무조건 윤년임)
+
+#include <stdio.h>
+
+void main() {
+
+	int y;
+	printf("연도를 입력하시오.\n");
+	scanf_s("%d", &y);
+
+	if (y % 4 == 0 && y % 100 != 0 || y % 400 == 0)
+	{
+		printf("%d년은 윤년입니다.\n", y);
+	}
+	else
+		printf("%d년은 윤년이 아닙니다\n",y);
+}
+
+
+//두 정수를 입력 받아  큰 수를 작은 수로 나눈 결과를 소수점 이하를 포함하여 정확하게 출력하시오.
+#include <stdio.h>
+
+void main() {
+
+	int a , b;
+	double res;
+
+	printf("두 정수를 입력하시오.\n");
+	scanf_s("%d %d" ,& a, &b);
+
+	if (a > b) {
+		res = (double)a / (double)b;
+	}
+	else {
+		res = (double)b / (double)a;
+	}
+	printf("결과 :%lf\n", res);
+}
+
+
+//몸무게와 키를 입력하여 BMI(body mass index)를 구하고, 
+//18미만이면 “저체중”, 18~25이면 “정상”, 25초과면 “과체중”을 출력하시오.(단, BMI = 몸무게/키2 , 몸무게:kg 단위, 키:m 단위)  (예) 몸무게 55kg,  키 1.65 m 라면 => BMI = 55/1.65 2 = 20.2
+#include <stdio.h>
+void main() {
+
+	int m,k;
+	double bmi ,k1;
+	printf("몸무게와 키를 입력하시오.\n");
+	scanf_s("%d %d", &m, &k);
+
+	k1 = (double)k / 100;
+	bmi = (double)m /(k1 * k1);
+	
+
+	if (bmi < 18.0) {
+		printf("저체중 입니다.");
+	}
+	else if (bmi > 25.0) {
+		printf("과체중 입니다.");
+	}
+	else {
+		printf("정상입니다.");
+	}
+
+}
+
+//지하철 이용거리를 입력 받아 요금을 계산하시오.
+//(10Km 이내: 1250원, 10~50Km : 5Km마다 100원 추가, 50Km 초과시: 8Km마다 100원 추가; (예) 11Km면 1250+100 = 1350원, 15Km면 1250+100 = 1350원)
+ 
+#include <stdio.h>
+void main() {
+	 
+	int km , num , km2 ;
+	int sum = 0;
+	int mon = 1250;
+	printf("지하철 이용거리를 입력하시오.\n");
+	
+	scanf_s("%d", &km);
+	km2 = km;
+
+
+	if (km > 10 && km<=50) {
+		   num = km / 5;
+		if (km % 5 == 0) {
+			num -= 2;
+			sum = 100 * num;
+			mon += sum;
+		}
+
+		else if ( num<=10 ) {
+			num -= 1;
+			sum = 100 * num;
+			mon += sum;
+	
+
+		}
+		else {
+			mon += 100;
+		}
+	}
+
+	if (km > 50) {
+		km2 -= 50;
+		num = km2 / 8;
+		mon += 800;
+		if (km2 % 8 == 0) {
+			sum = 100 * num;
+			mon += sum;
+		}
+		else if (num>=1){
+			num += 1;
+				sum = 100 * num;
+				mon += sum;
+			}
+		else {
+			mon += 100;
+		}
+	}
+
+	
+	    printf("요금 : %d", mon);
+
+}
+
+//상속액을 입력 받아 상속세 계산하기.
+//(단, 1억 원까지는 10 %, 1억~5억 원 20 %, 5억~10억 원 30 %, 10억~30억 원 40 %, 30억 원 이상 분은 50 % 임.
+//(예)1억3천만원이면 상속세는 1억 * 10 % +3천만 * 20 % = 1600 만원임)
+#include <stdio.h>
+
+void main() {
+
+	double a;
+	double s, ss, sss, ssss, sssss;
+	printf("상속액을 입력 받으시오.\n");
+	scanf_s("%lf", &a);
+
+
+	s = a * 0.1;
+	ss = (100000000 * 0.1) + ((a - 100000000) * 0.2);
+	sss = (100000000 * 0.1) + (400000000 * 0.2) + ((a - 500000000) * 0.3);
+	ssss = (100000000 * 0.1) + (400000000 * 0.2) + (500000000 * 0.3) + ((a - 1000000000) * 0.4);
+	sssss = (100000000 * 0.1) + (400000000 * 0.2) + (500000000 * 0.3) + (2000000000 * 0.4) + ((a - 3000000000) * 0.5);
+
+	if (a <= 100000000) {
+
+		printf("%.0lf", s);
+
+	}
+	else if (a <= 500000000) {
+		
+		printf("%.0lf", ss);
+	}
+	else if (a <= 1000000000) {
+		
+		printf("%.0lf", sss);
+	}
+	else if (a <= 3000000000) {
+
+		printf("%.0lf", ssss);
+	}
+	else {
+
+		printf("%.0lf", sssss);
+	}
+		
+		
+
+}
+
+
+9.다음을 참고로 표준입력으로 받은 월에 해당하는 분기를 출력하는 프로그램을 if문을 사용하여 작성하시오.
+
+1사분기:1,2,3 월,2사분기:4,5,6월,3사분기:7,8,9월,4사분기:10,11,12월
+
+
+
+#include <stdio.h>
+
+void main() {
+	
+	int month;
+	printf("몇월인지 입력하시오\n");
+	scanf_s("%d", &month);
+
+	if (month == 1 || month==2 || month==3) {
+		printf("1사분기 입니다.");
+	}
+	else if (month == 4 || month == 5 || month == 6) {
+		printf("2사분기 입니다.");
+	}
+
+	else if (month == 7 || month == 8 || month == 9) {
+		printf("3사분기 입니다.");
+	}
+	else if (month == 10 || month == 11 || month == 12) {
+		printf("4사분기 입니다.");
+	}
+	else {
+		printf("해당 월이 없습니다.");
+	}
+}
+
+

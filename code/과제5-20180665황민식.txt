@@ -1,0 +1,238 @@
+//정수 인자를 받아 3배 하여 리턴 하는 함수를 만들고,(  int  tripleValue(int ) ) 호출해보시오.
+#include <stdio.h>
+
+int  tripleValue(int a) {
+	return a * 3;
+}
+
+void main() {
+
+
+	int n , ret;
+
+	printf("정수를 입력하시오.");
+	scanf_s("%d", &n);
+	ret = tripleValue(n);
+	printf("result : %d\n", ret);
+
+
+
+}
+
+//정수변수 주소를 인자로 받아 해당 정수를 3배 하여 리턴 하는 함수를 만들어
+//(  int  triplePointer1(int *) ) 호출해보시오.
+#include <stdio.h>
+
+int triplePointer1(int *p) {
+	return (*p) * 3;
+}
+
+void main() {
+
+
+	int n, ret;
+
+	printf("정수를 입력하시오.");
+	scanf_s("%d", &n);
+	ret = triplePointer1(&n);
+	printf("result : %d\n", ret);
+
+
+
+}
+
+//세 개의 정수포인터를 인자로 받아 제일 큰 수를 리턴 하는 함수를 만들고 호출해 보시오. 
+//(예)int  maxValue(int *, int *, int *)
+#include <stdio.h>
+
+int  maxValue(int* p1, int* p2, int* p3) {
+
+	if (*p1 >= *p2 && *p1 >= *p3) {
+		return *p1;
+	}
+	else if (*p2 >= *p1 && *p2 >= *p3) {
+		return *p2;
+	}
+	else return *p3;
+}
+
+void main() {
+	int n1,n2,n3, ret;
+	printf("정수를 3개 입력하시오.");
+	scanf_s("%d %d %d", &n1, &n2, &n3);
+	ret = maxValue(&n1, &n2, &n3);
+	printf("result : %d\n", ret);
+}
+
+//세 개의 정수포인터를 인자로 받아 제일 큰 수의 주소를 리턴 하는 함수를 만들고 호출해 보시오. 
+//(예)int * maxPosition(int *, int *, int *)
+#include <stdio.h>
+int* maxPosition(int* p1, int* p2, int* p3) {
+	if (*p1 >= *p2 && *p1 >= *p3) {
+		return p1;
+	}
+	else if (*p2 >= *p1 && *p2 >= *p3) {
+		return p2;
+	}
+	else return p3;
+}
+
+void main() {
+	int n1, n2, n3;
+	int* retp;
+	printf("정수를 3개 입력하시오.\n");
+	scanf_s("%d %d %d", &n1, &n2, &n3);
+	retp = maxPosition(&n1, &n2, &n3);
+	printf("result : %d\n", *retp);
+}
+
+//포인터 인자의 해당변수를 N만큼 더해주는 함수를 만드시오.(  void   addN(int *p, int N)   )
+#include <stdio.h>
+
+void   addN(int* p, int N) {
+	*p+=N;
+
+	
+}
+void main() {
+	int a,b;
+	
+	printf("수를 입력하시오.\n");
+	scanf_s("%d %d", &a,&b);
+	 addN(&a, b);
+	 printf("%d", a);
+}
+
+
+//수업시간에 구현한 swap()함수를 그대로 이용하여 배열의 bubble 정렬을 구현하시오.
+#include<stdio.h>
+void swap(int* p1, int* p2) {
+	int b;
+	b = *p1;
+	*p1 = *p2;
+	*p2 = b;
+}
+
+
+
+
+void main() {
+	int a[10];
+
+	printf("10개의 숫자를 입력하시오.");
+	for (int i = 0; i < 10; i++) {
+		 scanf_s("%d",&a[i]);
+	}
+
+	for (int i = 0; i < 10 - 1; i++) {
+		for (int j = 0; j < 10 - 1 - i; j++) {
+			if (a[j] > a[j + 1]) {
+				swap(&a[j],&a[j + 1]);
+				
+			}
+			
+		}
+	}
+	for (int i = 0; i < 10; i++) {
+		printf("%d ", a[i]);
+	}
+	
+}
+
+
+//두 개의 포인터변수값을 서로 바꿔주는 swap2(, )함수를 구현하고 
+//호출하여 적절히 바뀜을 보이시오.(즉, 포인터 변수에 저장된 주소값을 서로 바꿈. 2중 포인터 필요함)
+#include <stdio.h>
+void swap2(int** pp1,int **pp2) {
+	int* tmp;
+
+	 tmp = *pp1;
+	*pp1 = *pp2;
+	*pp2  = tmp;
+
+
+}
+void main() {
+	int a = 10;
+	int b = 20;
+	int* p1 = &a;
+	int* p2 = &b;
+	printf("%p %d %p %d\n", p1, *p1, p2,*p2);
+	
+	swap2(&p1, &p2);
+	printf("%p %d %p %d\n", p1, *p1, p2, *p2);
+	
+
+
+
+}
+
+
+//다음을참고로 char 형 포인터에 관한 프로그램을 작성하시오.
+//변수를 선언하여 문자'*'를 저장
+//포인터 변수를 선언하여 위 변수의 주소,코드값,문자를 출력
+#include <stdio.h>
+
+void main() {
+	char a = '*';
+	char* pchar =&a;
+
+	printf("주소 : %p 코드값 : %d 문자 : %c", pchar, *pchar, *pchar);
+	
+
+}
+
+/*문자열 5개를 입력 받아 영어사전식으로 정렬하여 출력하시오.
+(2차원 배열 이용) (문자열 정렬: “a”<“aaa“<“ab”<…<“zzz”)
+*/
+#include <stdio.h>
+#include <string.h>
+void swapStr(char* p, char* p1);
+void main() {
+
+	int b;
+	char a[5][100];
+	char* p[5];
+	
+	
+	printf("문자열을 5개 입력하시오.\n");
+	for (int i = 0; i < 5; i++) {
+		gets_s(a[i], 100);
+	}
+	
+	for (int i = 0; i < 5-1; i++) {
+		for (int j = 0; j < 5-1-i; j++) {
+			b = strcmp(a[j], a[j + 1]);
+			if (b > 0) {
+				swapStr(a[j], a[j+1]);
+			}
+		}
+		
+	}
+
+	
+
+
+
+
+	for (int i = 0; i < 5; i++) {
+		printf("%s", a[i]);
+		if (i < 4) {
+			printf("<");
+		}
+		
+	}
+	
+	
+}
+void swapStr(char* p, char* p1) {
+
+	char pp[100];
+
+	strcpy_s(pp, 100, p);
+	strcpy_s(p, 100, p1);
+	strcpy_s(p1, 100, pp);
+	
+}
+
+
